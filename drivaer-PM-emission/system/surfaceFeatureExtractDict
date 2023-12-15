@@ -1,0 +1,157 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |				
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  9                                   	
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      surfaceFeatureExtractDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+frontD.stl
+{
+    // Extract raw features (none | extractFromFile | extractFromSurface)
+    extractionMethod    extractFromSurface;
+
+    // Mark edges whose adjacent surface normals are at an angle less
+    // than includedAngle as features
+    // - 0  : selects no edges
+    // - 180: selects all edges
+    includedAngle       150;
+
+    // Do not mark region edges
+    geometricTestOnly   yes;
+
+    // Generate additional intersection features (none | self | region)
+    intersectionMethod  none;
+
+    // Tolerance for surface intersections
+    // tolerance           1e-3;
+
+    subsetFeatures
+    {
+    // Keep nonManifold edges (edges with >2 connected faces)
+	nonManifoldEdges       yes;
+
+    // Keep open edges (edges with 1 connected face)
+	openEdges       yes;
+    }
+
+// Output options:
+
+    // Write features to obj format for postprocessing
+    writeObj            yes;
+}
+
+rearD.stl
+{
+    // Extract raw features (none | extractFromFile | extractFromSurface)
+    extractionMethod    extractFromSurface;
+
+    // Mark edges whose adjacent surface normals are at an angle less
+    // than includedAngle as features
+    // - 0  : selects no edges
+    // - 180: selects all edges
+    includedAngle       150;
+
+    // Do not mark region edges
+    geometricTestOnly   yes;
+
+    // Generate additional intersection features (none | self | region)
+    intersectionMethod  none;
+
+    // Tolerance for surface intersections
+    // tolerance           1e-3;
+
+    subsetFeatures
+    {
+    // Keep nonManifold edges (edges with >2 connected faces)
+	nonManifoldEdges       yes;
+
+    // Keep open edges (edges with 1 connected face)
+	openEdges       yes;
+    }
+
+// Output options:
+
+    // Write features to obj format for postprocessing
+    writeObj            yes;
+}
+
+frontP.stl
+{
+    // Extract raw features (none | extractFromFile | extractFromSurface)
+    extractionMethod    extractFromSurface;
+
+    // Mark edges whose adjacent surface normals are at an angle less
+    // than includedAngle as features
+    // - 0  : selects no edges
+    // - 180: selects all edges
+    includedAngle       150;
+
+    // Do not mark region edges
+    geometricTestOnly   yes;
+
+    // Generate additional intersection features (none | self | region)
+    intersectionMethod  none;
+
+    // Tolerance for surface intersections
+    // tolerance           1e-3;
+
+    subsetFeatures
+    {
+    // Keep nonManifold edges (edges with >2 connected faces)
+	nonManifoldEdges       yes;
+
+    // Keep open edges (edges with 1 connected face)
+	openEdges       yes;
+    }
+
+// Output options:
+
+    // Write features to obj format for postprocessing
+    writeObj            yes;
+}
+
+rearP.stl
+{
+    // Extract raw features (none | extractFromFile | extractFromSurface)
+    extractionMethod    extractFromSurface;
+
+    // Mark edges whose adjacent surface normals are at an angle less
+    // than includedAngle as features
+    // - 0  : selects no edges
+    // - 180: selects all edges
+    includedAngle       150;
+
+    // Do not mark region edges
+    geometricTestOnly   yes;
+
+    // Generate additional intersection features (none | self | region)
+    intersectionMethod  none;
+
+    // Tolerance for surface intersections
+    // tolerance           1e-3;
+
+    subsetFeatures
+    {
+    // Keep nonManifold edges (edges with >2 connected faces)
+	nonManifoldEdges       yes;
+
+    // Keep open edges (edges with 1 connected face)
+	openEdges       yes;
+    }
+
+// Output options:
+
+    // Write features to obj format for postprocessing
+    writeObj            yes;
+}
+
+
+// ************************************************************************* //

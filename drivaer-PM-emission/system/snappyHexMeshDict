@@ -1,0 +1,384 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  7                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      snappyHexMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+/***************************************************/
+castellatedMesh 	true;
+snap 			true;
+addLayers 		true;
+/***************************************************/
+
+
+
+/***************************************************/
+
+geometry
+{
+
+    body1.stl
+    {
+        type triSurfaceMesh;
+        name body1;
+    }
+
+    frontD.stl
+    {
+        type triSurfaceMesh;
+        name frontD;
+    }
+
+    rearD.stl
+    {
+        type triSurfaceMesh;
+        name rearD;
+    }
+
+    frontP.stl
+    {
+        type triSurfaceMesh;
+        name frontP;
+    }
+
+    rearP.stl
+    {
+        type triSurfaceMesh;
+        name rearP;
+    }
+
+    vr1
+    {
+        type searchableBox;
+        min ( -7.5 -3.0 0.0 );
+        max ( 25.0 3.0 4.0 );
+    }
+
+    vr2
+    {
+        type searchableBox;
+        //min ( -3.0 0.0 0.0 );
+        //max ( 15.0 2.0 3.0 );
+        min ( -2.0 -2.0 0.0 );
+        max (  6.0 2.0 2.0 );
+    }
+
+    vr3
+    {
+        type searchableBox;
+        min ( 2.5 -1.5 0.0 );
+        max ( 6.5 1.5 1.7 );
+    }
+
+    vr4
+    {
+        type searchableBox;
+        min ( 3.2 -1.0 0.0 );
+        max ( 5.2 1.0 1.3 );
+    }
+
+}
+
+/***************************************************/
+
+
+
+/***************************************************/
+
+castellatedMeshControls
+{
+
+    maxLocalCells 500000;
+    maxGlobalCells 10000000;		//*******
+    minRefinementCells 0;
+    nCellsBetweenLevels 5;
+    resolveFeatureAngle 30.0;		//curvature
+    allowFreeStandingZoneFaces true;
+    planarAngle 30.0;
+    maxLoadUnbalance 0.1;
+
+    locationInMesh (-9.0 3.0 3.0 ); //(10 1 1)
+
+
+//////////////////////////////////////
+    features
+    (
+    
+        {
+            file "frontD.eMesh";
+            //levels ((0.025 0));
+            level 0;
+        }
+
+    
+        {
+            file "rearD.eMesh";
+            //levels ((0.025 0));
+            level 0;
+        }
+
+        {
+            file "frontP.eMesh";
+            //levels ((0.025 0));
+            level 0;
+        }
+
+    
+        {
+            file "rearP.eMesh";
+            //levels ((0.025 0));
+            level 0;
+        }
+
+    );
+//////////////////////////////////////
+
+
+//////////////////////////////////////
+    refinementSurfaces
+    {
+        body1
+        {
+            level ( 3 4 );	
+        }
+
+        frontD
+        {
+            level ( 4 4 );
+        }
+
+        rearD
+        {
+            level ( 4 4 );
+        }
+
+        frontP
+        {
+            level ( 4 4 );
+        }
+
+        rearP
+        {
+            level ( 4 4 );
+        }
+
+    }
+//////////////////////////////////////
+
+
+//////////////////////////////////////
+    refinementRegions
+    {
+        vr1
+        {
+            mode inside;
+            levels (( 1E5 1 ));
+        }
+
+        vr2
+        {
+            mode inside;	
+            levels (( 1E5 2 ));
+        }
+
+        vr3
+        {
+            mode inside;
+            levels (( 1E5 3 ));
+        }
+
+        vr4
+        {
+            mode inside;
+            levels (( 1E5 4 ));
+        }
+    }
+//////////////////////////////////////
+
+}
+
+/***************************************************/
+
+
+
+/***************************************************/
+
+snapControls
+{
+
+// Number of patch smoothing iterations before finding correspondence
+// to surface
+nSmoothPatch 3;	//recommended
+//nSmoothPatch 10;	//improved
+
+tolerance 2.0;
+//tolerance 1.0;
+
+nSolveIter 30;	//recommended
+//nSolveIter 100;	//improved
+
+nRelaxIter 5;	//default
+//nRelaxIter 10;	//improved	10-20-50
+
+// Feature snapping
+
+    // Number of feature edge snapping iterations.
+    // Leave out altogether to disable.
+    nFeatureSnapIter 10;		//recommended
+    //nFeatureSnapIter 100;		//improved	20-50-100
+
+    // Detect (geometric only) features by sampling the surface
+    // (default=false).
+    implicitFeatureSnap false;
+
+    // Use castellatedMeshControls::features (default = true)
+    explicitFeatureSnap true;
+
+    // Detect features between multiple surfaces
+    // (only for explicitFeatureSnap, default = false)
+    multiRegionFeatureSnap false;
+
+}
+
+/***************************************************/
+
+
+
+
+/***************************************************/
+
+addLayersControls
+{
+
+/////////////////////////////////////////////
+    relativeSizes true;
+
+    expansionRatio 1.2;		//1.0;
+    finalLayerThickness 0.3;
+    minThickness 0.01;		//0.1 0.25
+/////////////////////////////////////////////
+
+
+    layers
+    {
+
+        body1
+        {
+            nSurfaceLayers 3;
+            expansionRatio 1.2;
+            finalLayerThickness 0.3;
+            minThickness 0.01;
+        }
+
+        frontD
+        {
+            nSurfaceLayers 3;
+            expansionRatio 1.2;
+            finalLayerThickness 0.3;
+            minThickness 0.01;
+        }
+
+        rearD
+        {
+            nSurfaceLayers 3;
+            expansionRatio 1.2;
+            finalLayerThickness 0.3;
+            minThickness 0.01;
+        }
+
+        frontP
+        {
+            nSurfaceLayers 3;
+            expansionRatio 1.2;
+            finalLayerThickness 0.3;
+            minThickness 0.01;
+        }
+
+        rearP
+        {
+            nSurfaceLayers 3;
+            expansionRatio 1.2;
+            finalLayerThickness 0.3;
+            minThickness 0.01;
+        }
+
+        ffminz
+        {
+            nSurfaceLayers 3;
+            expansionRatio 1.2;
+            finalLayerThickness 0.3;
+            minThickness 0.01;
+        }
+
+    }
+
+
+/////////////////////////////////////////////
+    nGrow 0;
+
+    featureAngle 130.0;
+
+    maxFaceThicknessRatio 0.5;
+
+    nSmoothSurfaceNormals 1;
+    nSmoothNormals 3;
+    nSmoothThickness 10;
+
+    slipFeatureAngle 30.0;
+    nRelaxIter 5;
+
+    maxThicknessToMedialRatio 0.3;
+
+    minMedialAxisAngle 90;
+    minMedianAxisAngle 90;
+
+    nBufferCellsNoExtrude 0;
+    nLayerIter 50;
+    nRelaxedIter 20;
+
+    //writeVTK false;
+    //noErrors false;
+    //layerRecovery 1;
+    //growZoneLayers false;
+    //projectGrownUp 0.0;
+/////////////////////////////////////////////
+
+}
+
+/***************************************************/
+
+
+
+
+/***************************************************/
+
+meshQualityControls
+{
+    #include "meshQualityDict"
+
+    nSmoothScale 4;
+    errorReduction 0.75;
+
+    relaxed
+    {
+        maxNonOrtho 75;
+    }
+
+}
+
+/***************************************************/
+
+
+debug 0;
+mergeTolerance 1.0E-6;
+//autoBlockMesh false;

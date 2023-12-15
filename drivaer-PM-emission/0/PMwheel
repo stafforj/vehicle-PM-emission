@@ -1,0 +1,125 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  7                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      PMwheel;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions [ 0 0 0 0 0 0 0 ];
+internalField uniform 0.0;
+
+boundaryField
+{
+    ffminx
+    {
+        type fixedValue;
+	value uniform 0.0;
+    }
+
+    ffmaxx
+    {
+        type            inletOutlet;
+	phi		phi;
+        value           uniform 0.0;
+        inletValue      uniform 0.0;
+    }
+
+    ffminy
+    {
+        type slip;
+    }
+
+    ffmaxy
+    {
+        type slip;
+    }
+
+    ffminz
+    {
+        type zeroGradient;
+    }
+
+    ffmaxz
+    {
+        type slip;
+    }
+
+    body1
+    {
+        type zeroGradient;
+    }
+
+    frontD
+    {
+/*
+        type fixedValue;
+	value uniform 1.0;
+*/
+        type            uniformFixedValue;
+        uniformValue    table
+        (
+            (0          1.0) //30mph
+            (15         1.0) //30mph - harsh braking event
+            (17         0.0) //0mph - begin idle time
+            (20         0.0) //0mph - end idle time
+        );
+    }
+
+    rearD
+    {
+/*
+        type fixedValue;
+	value uniform 1.0;
+*/
+        type            uniformFixedValue;
+        uniformValue    table
+        (
+            (0          1.0) //30mph
+            (15         1.0) //30mph - harsh braking event
+            (17         0.0) //0mph - begin idle time
+            (20         0.0) //0mph - end idle time
+        );
+    }
+
+    frontP
+    {
+/*
+        type fixedValue;
+	value uniform 1.0;
+*/
+        type            uniformFixedValue;
+        uniformValue    table
+        (
+            (0          1.0) //30mph
+            (15         1.0) //30mph - harsh braking event
+            (17         0.0) //0mph - begin idle time
+            (20         0.0) //0mph - end idle time
+        );
+    }
+
+    rearP
+    {
+/*
+        type fixedValue;
+	value uniform 1.0;
+*/
+        type            uniformFixedValue;
+        uniformValue    table
+        (
+            (0          1.0) //30mph
+            (15         1.0) //30mph - harsh braking event
+            (17         0.0) //0mph - begin idle time
+            (20         0.0) //0mph - end idle time
+        );
+    }
+
+}
