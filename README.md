@@ -16,7 +16,7 @@ The aim of this work was to investigate the spatio-temporal transport of non-exh
 
 ## Vehicle details
 
-The vehicle geometry we have implemented is based on the [DrivAer model](https://www.epc.ed.tum.de/en/aer/research-groups/automotive/drivaer/) developed at the Technical University of Munich. This was chosen as it a realistic vehicle model for aerodynamics investigations and is openly accessible for research use. This has resulted in the publication of numerous experimental and numerical aerodynamics studies which also support computational validation. We also acknowledge the steady-state WolfDynamics [tutorials](http://www.wolfdynamics.com/tutorials.html?id=94) which were a useful validation resource during the construction of our full-scale, time-dependent model.
+The vehicle geometry we have implemented is based on the [DrivAer model](https://www.epc.ed.tum.de/en/aer/research-groups/automotive/drivaer/) developed at the Technical University of Munich. This was chosen as it a realistic vehicle model for aerodynamics investigations and is openly accessible for research use. Numerous experimental and numerical aerodynamics studies have been published which also support computational validation. We also acknowledge the steady-state WolfDynamics [tutorials](http://www.wolfdynamics.com/tutorials.html?id=94) which were a useful validation resource during the construction of our full-scale, time-dependent model.
 
 
 
