@@ -2,7 +2,7 @@
 
 _This repository contains OpenFOAM (v2206) case files for performing computational fluid dynamics simulations on non-exhaust emissions from road vehicles._
 
-![snapshot](./Images/video-snapshot.png)
+![snapshot](./images/video-snapshot.png)
 
 ## Background & Motivation
 
