@@ -1,0 +1,532 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  7                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+libs            (OpenFOAM fieldFunctionObjects);
+
+application     pisoFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         20.1;
+
+deltaT          1e-4;
+
+writeControl    timeStep;
+
+writeInterval   10000; //1000
+
+purgeWrite      0;
+
+writeFormat     binary;
+
+writePrecision  12;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable false;
+
+
+// ************************************************************************* //
+
+functions
+{
+
+///////////////////////////////////////////////////////////////////////////
+
+PMwheel
+{
+    type            scalarTransport;
+    libs            ("libsolverFunctionObjects.so");
+
+
+    // Optional entries
+
+    // Name of scalar field to transport, default = 's'
+    field           PMwheel;
+
+    // Name of flux field, default = 'phi'
+    phi             phi;
+
+    // Name of phase field to constrain scalar to, default = 'none'
+    phase           none;
+
+    // Set the scalar to zero on start/re-start
+    resetOnStartUp  no;
+
+    // Name of field to use when looking up schemes from fvSchemes
+    // default = <field>
+    // schemesField    U;
+
+
+    // Diffusivity
+
+    // Fixed value diffusivity
+    D               0.001;
+
+    // Name of field to use as diffusivity, default = 'none'
+    nut             none;
+
+    executeControl      timeStep;
+    executeInterval     1;
+    writeControl        writeTime; //timeStep
+    //writeInterval       1;
+
+    // Run-time selectable sources
+    fvOptions
+    {
+    }
+}
+
+PMroad
+{
+    type            scalarTransport;
+    libs            ("libsolverFunctionObjects.so");
+
+
+    // Optional entries
+
+    // Name of scalar field to transport, default = 's'
+    field           PMroad;
+
+    // Name of flux field, default = 'phi'
+    phi             phi;
+
+    // Name of phase field to constrain scalar to, default = 'none'
+    phase           none;
+
+    // Set the scalar to zero on start/re-start
+    resetOnStartUp  no;
+
+    // Name of field to use when looking up schemes from fvSchemes
+    // default = <field>
+    schemesField    PMwheel;
+
+
+    // Diffusivity
+
+    // Fixed value diffusivity
+    D               0.001;
+
+    // Name of field to use as diffusivity, default = 'none'
+    nut             none;
+
+    executeControl      timeStep;
+    executeInterval     1;
+    writeControl        writeTime; //timeStep
+    //writeInterval       1;
+
+    // Run-time selectable sources
+    fvOptions
+    {
+    }
+}
+
+
+rearD
+{
+    log no;
+    enabled yes;
+
+    type forceCoeffs;
+    libs ( "libforces.so");
+
+    patches ( rearD );
+
+    rho rhoInf;
+    rhoInf 1.205;
+
+    CofR ( 0 0 0);
+    liftDir ( 0 0 1);
+    dragDir ( 1 0 0);
+    pitchAxis ( 0 1 0);
+    magUInf 13.4;
+    lRef 1;
+    Aref 1;
+    writeControl timeStep;
+    writeInterval 1;
+}
+
+rearP
+{
+    log no;
+    enabled yes;
+
+    type forceCoeffs;
+    libs ( "libforces.so");
+
+    patches ( rearP );
+
+    rho rhoInf;
+    rhoInf 1.205;
+
+    CofR ( 0 0 0);
+    liftDir ( 0 0 1);
+    dragDir ( 1 0 0);
+    pitchAxis ( 0 1 0);
+    magUInf 13.4;
+    lRef 1;
+    Aref 1;
+    writeControl timeStep;
+    writeInterval 1;
+}
+
+body1
+{
+    log no;
+    enabled yes;
+
+    type forceCoeffs;
+    libs ( "libforces.so");
+
+    patches ( body1);
+
+    rho rhoInf;
+    rhoInf 1.205;
+
+    CofR ( 0 0 0);
+    liftDir ( 0 0 1);
+    dragDir ( 1 0 0);
+    pitchAxis ( 0 1 0);
+    magUInf 13.4;
+    lRef 1;
+    Aref 1;
+    writeControl timeStep;
+    writeInterval 1;
+}
+
+frontD
+{
+    log no;
+    enabled yes;
+
+    type forceCoeffs;
+    libs ( "libforces.so");
+
+    patches ( frontD);
+
+    rho rhoInf;
+    rhoInf 1.205;
+
+    CofR ( 0 0 0);
+    liftDir ( 0 0 1);
+    dragDir ( 1 0 0);
+    pitchAxis ( 0 1 0);
+    magUInf 13.4;
+    lRef 1;
+    Aref 1;
+    writeControl timeStep;
+    writeInterval 1;
+}
+
+frontP
+{
+    log no;
+    enabled yes;
+
+    type forceCoeffs;
+    libs ( "libforces.so");
+
+    patches ( frontP);
+
+    rho rhoInf;
+    rhoInf 1.205;
+
+    CofR ( 0 0 0);
+    liftDir ( 0 0 1);
+    dragDir ( 1 0 0);
+    pitchAxis ( 0 1 0);
+    magUInf 13.4;
+    lRef 1;
+    Aref 1;
+    writeControl timeStep;
+    writeInterval 1;
+}
+
+
+all
+{
+    log yes;
+    enabled yes;
+
+    type forceCoeffs;
+    libs ( "libforces.so");
+
+    patches ( "frontD" "rearD" "frontP" "rearP" "body1");
+
+    rho rhoInf;
+    rhoInf 1.205;
+
+    CofR ( 0 0 0);
+
+    liftDir ( 0 0 1);
+    dragDir ( 1 0 0);
+    pitchAxis ( 0 1 0);
+
+    magUInf 13.4;
+    lRef 1;
+    Aref 2.09;	//projected area in x, measured using paraview
+
+    writeControl timeStep;
+    writeInterval 1;
+}
+
+///////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////
+
+yplus
+{
+    type                yPlus;
+    libs		("libfieldFunctionObjects.so");
+
+    enabled true;
+
+    writeControl writeTime; //outputTime
+    //writeControl timeStep;
+    //writeInterval 1;
+
+    //log true;
+}
+
+///////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////
+Q
+{
+    type                Q;
+    //functionObjectLibs  ("libutilityFunctionObjects.so");
+    libs		("libutilityFunctionObjects.so");
+
+    enabled true;
+
+    writeControl writeTime; //outputTime
+    //writeControl timeStep;
+    //writeInterval 1;
+
+    //log true;
+}
+///////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////
+
+minmaxdomain_scalar
+{
+    type            volFieldValue;
+    libs            ("libfieldFunctionObjects.so");
+
+    enabled         true;   //true or false
+    log             true;   //write to screen
+    
+    //writeControl    writeTime;
+    writeControl    timeStep;
+    writeInterval   1;
+
+    writeFields     false;  //write solution to field value - Not needed when only reporting value to screen
+
+    writeLocation   true;   //write location in the output file
+
+    //mode component;
+
+    regionType      all;
+
+    operation       none;
+
+    fields
+    (
+        p nut nuTilda PMwheel PMroad
+    );
+}
+
+///////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////
+
+wallShearStress1
+{
+    type                wallShearStress;
+    libs		("libutilityFunctionObjects.so");
+
+    enabled true;
+
+    writeControl writeTime; //outputTime
+    //writeControl timeStep;
+    //writeInterval 1;
+
+    //log true;
+}
+
+///////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////
+
+    fieldAverage
+    {
+        type            fieldAverage;
+        libs		("libfieldFunctionObjects.so");
+        enabled         true;
+        writeControl    writeTime; // outputTime
+
+	//writeControl   timeStep;
+	//writeInterval  100;
+
+	//cleanRestart true;
+
+	timeStart       0.5;
+	//timeEnd         1000;
+
+        fields
+        (
+            U
+            {
+                mean        on;
+                prime2Mean  on;
+                base        time;
+            }
+
+            p
+            {
+                mean        on;
+                prime2Mean  off;
+                base        time;
+            }
+/*
+            nut
+            {
+                mean        on;
+                prime2Mean  off;
+                base        time;
+            }
+
+            nuTilda
+            {
+                mean        on;
+                prime2Mean  off;
+                base        time;
+            }
+*/
+            Q
+            {
+                mean        on;
+                prime2Mean  off;
+                base        time;
+            }
+
+            yPlus
+            {
+                mean        on;
+                prime2Mean  off;
+                base        time;
+            }
+
+            wallShearStress
+            {
+                mean        on;
+                prime2Mean  off;
+                base        time;
+            }
+
+	    PMwheel
+	    {
+		mean	    on;
+		prime2Mean  off;
+		base	    time;
+	    }
+
+	    PMroad
+	    {
+		mean	    on;
+		prime2Mean  off;
+		base	    time;
+	    }
+
+        );
+    }
+
+///////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////
+
+minmaxdomain_vector
+{
+    type            volFieldValue;
+    libs            ("libfieldFunctionObjects.so");
+
+    enabled         true;   //true or false
+    log             true;   //write to screen
+    
+    //writeControl    writeTime;
+    writeControl    timeStep;
+    writeInterval   1;
+
+    writeFields     false;  //write solution to field value - Not needed when only reporting value to screen
+
+    writeLocation   true;   //write location in the output file
+
+    //mode component;
+
+    regionType      all;
+
+    operation       none;
+
+    fields
+    (
+        U
+    );
+}
+
+mindomain_scalar
+{
+    $minmaxdomain_scalar
+    operation       min;
+}
+
+mindomain_vector
+{
+    $minmaxdomain_vector
+    operation       min; //minMag
+}
+
+maxdomain_scalar
+{
+    $minmaxdomain_scalar
+    operation       max;
+}
+
+maxdomain_vector
+{
+    $minmaxdomain_vector
+    operation       max; //maxMag
+}
+
+///////////////////////////////////////////////////////////////////////////
+
+    #include "FOsurfaces"
+    #include "FOstreamlines"
+
+};

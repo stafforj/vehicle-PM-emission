@@ -1,0 +1,151 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  7                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions [ 0 1 -1 0 0 0 0 ];
+internalField uniform (13.4 0.0 0.0);
+
+boundaryField
+{
+    ffminx
+    {
+/*
+        type fixedValue;
+        value uniform ( 13.4 0.0 0.0 );
+*/
+        type            uniformFixedValue;
+        uniformValue    table
+	(
+            (0 	 	(13.4 0 0)) //30mph
+            (15 	(13.4 0 0)) //30mph - harsh braking event
+            (17 	(0.0 0 0)) //0mph - begin idle time
+	    (20		(0.0 0 0)) //0mph - end idle time
+      	);
+    }
+
+    ffmaxx
+    {
+	type		inletOutlet;
+	inletValue	uniform (13.4 0 0);
+	value		uniform (13.4 0 0);
+    }
+
+    ffminy
+    {
+        type slip;
+    }
+
+    ffmaxy
+    {
+        type slip;
+    }
+
+    ffminz
+    {
+/*
+        type fixedValue;
+        value uniform ( 13.4 0.0 0.0 );
+*/
+        type            uniformFixedValue;
+        uniformValue    table
+	(
+            (0 	 	(13.4 0 0)) //30mph
+            (15 	(13.4 0 0)) //30mph - harsh braking event begins
+            (17 	(0.0 0 0)) //0mph - event ends, begin idle time 
+	    (20		(0.0 0 0)) //0mph - end idle time
+      	);
+     }
+
+    ffmaxz
+    {
+        type slip;
+    }
+
+    body1
+    {
+        type fixedValue;
+        value uniform ( 0 0 0);
+    }
+
+    frontD
+    {
+        type rotatingWallVelocity;
+        value uniform ( 0.0 0.0 0.0 );
+        origin ( 0.007 0.0 0.29 );
+        axis ( 0.0 1.0 0.0 );
+        //omega -42; // r=0.3186m
+
+	omega	table
+	(
+	    (0		-42)
+	    (15		-42)
+	    (17		0)
+	    (20		0)
+	);
+    }
+
+    rearD
+    {
+        type rotatingWallVelocity;
+        value uniform ( 0.0 0.0 0.0 );
+        origin ( 2.793 0.0 0.29 );
+        axis ( 0.0 1.0 0.0 );
+        //omega -42; // r=0.3186m
+
+	omega	table
+	(
+	    (0		-42)
+	    (15		-42)
+	    (17		0)
+	    (20		0)
+	);
+    }
+
+    frontP
+    {
+        type rotatingWallVelocity;
+        value uniform ( 0.0 0.0 0.0 );
+        origin ( 0.007 0.0 0.29 );
+        axis ( 0.0 1.0 0.0 );
+        //omega -42; // r=0.3186m
+
+	omega	table
+	(
+	    (0		-42)
+	    (15		-42)
+	    (17		0)
+	    (20		0)
+	);
+    }
+
+    rearP
+    {
+        type rotatingWallVelocity;
+        value uniform ( 0.0 0.0 0.0 );
+        origin ( 2.793 0.0 0.29 );
+        axis ( 0.0 1.0 0.0 );
+        //omega -42; // r=0.3186m
+
+	omega	table
+	(
+	    (0		-42)
+	    (15		-42)
+	    (17		0)
+	    (20		0)
+	);
+
+    }
+
+}

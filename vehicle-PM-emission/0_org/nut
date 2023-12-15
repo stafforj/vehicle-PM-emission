@@ -1,0 +1,83 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  7                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      nut;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions [ 0 2 -1 0 0 0 0 ];
+internalField uniform 0.0001;
+
+boundaryField
+{
+    ffminx
+    {
+        type zeroGradient;
+    }
+
+    ffmaxx
+    {
+        type zeroGradient;
+    }
+
+    ffminy
+    {
+        type slip;
+    }
+
+    ffmaxy
+    {
+        type slip;
+    }
+
+    ffminz
+    {
+        type nutUSpaldingWallFunction;
+        value uniform 0.0001;
+    }
+
+    ffmaxz
+    {
+        type slip;
+    }
+
+    body1
+    {
+        type nutUSpaldingWallFunction;
+        value uniform 0.0001;
+    }
+
+    frontD
+    {
+        type nutUSpaldingWallFunction;
+        value uniform 0.0001;
+    }
+
+    rearD
+    {
+        type nutUSpaldingWallFunction;
+        value uniform 0.0001;
+    }
+
+    frontP
+    {
+        type nutUSpaldingWallFunction;
+        value uniform 0.0001;
+    }
+
+    rearP
+    {
+        type nutUSpaldingWallFunction;
+        value uniform 0.0001;
+    }
+
+}
