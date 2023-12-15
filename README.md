@@ -1,4 +1,4 @@
-# drivaer-PM-emission
+# vehicle-PM-emission
 
 _This repository contains OpenFOAM (v2206) case files for performing computational fluid dynamics simulations on non-exhaust emissions from road vehicles._
 
