@@ -21,7 +21,7 @@ The vehicle geometry we have implemented is based on the [DrivAer model](https:/
 ![vehicles](./images/vehicles-and-domain.png)
 
 
-We also acknowledge the steady-state WolfDynamics [tutorials](http://www.wolfdynamics.com/tutorials.html?id=94) which were a useful validation resource during the construction of our full-scale, time-dependent model.
+We also acknowledge the steady-state WolfDynamics [tutorials](http://www.wolfdynamics.com/tutorials.html?id=94) which were a useful reference resource during the construction of the full-scale, time-dependent model in this repository.
 
 
 
