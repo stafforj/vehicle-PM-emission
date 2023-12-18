@@ -23,6 +23,10 @@ The vehicle geometry we have implemented is based on the [DrivAer model](https:/
 
 We also acknowledge the steady-state WolfDynamics [tutorials](http://www.wolfdynamics.com/tutorials.html?id=94) which were a useful reference resource during the construction of the full-scale, time-dependent model in this repository.
 
+## Model validation
+
+The model was validated against previous aerodynamic investigations on the DrivAer model. Below shows the drag coefficient over time.
+
 
 
 
