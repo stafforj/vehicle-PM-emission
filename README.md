@@ -25,7 +25,7 @@ We also acknowledge the steady-state WolfDynamics [tutorials](http://www.wolfdyn
 
 ## Model validation
 
-The numerical model was validated against previous aerodynamic investigations by [Varney et al. (2020)](https://doi.org/10.3390/fluids5040236) who performed experimental measurements for each vehicle model and also tabulated results from past studies in their appendix. Below shows the drag coefficient over time, the average C_d (when the model reaches quasi-steady state conditions at time > 2s) as well as the upper and low bounds observed for C_d in previous literature. 
+The numerical model was validated against previous aerodynamic investigations by [Varney et al. (2020)](https://doi.org/10.3390/fluids5040236) who performed experimental measurements for each vehicle model and also tabulated results from past studies in their appendix. Below shows the drag coefficient ($C_d$) over time, the average $C_d$ (when the model reaches quasi-steady state conditions at time > 2s) as well as the upper and low bounds observed for $C_d$ in previous literature. 
 
 ![Cd](./images/Cd-time.png)
 
