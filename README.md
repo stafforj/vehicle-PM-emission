@@ -16,7 +16,7 @@ The aim of this work was to investigate the spatio-temporal transport of non-exh
 
 ## Vehicle and domain details
 
-The vehicle geometry we have implemented is based on the [DrivAer model](https://www.epc.ed.tum.de/en/aer/research-groups/automotive/drivaer/) developed at the Technical University of Munich. This was chosen as it a realistic vehicle model for aerodynamics investigations and is openly accessible for research use. Numerous experimental and numerical aerodynamics studies have been published which also support computational validation. The figure below 
+The vehicle geometry we have implemented is based on the [DrivAer model](https://www.epc.ed.tum.de/en/aer/research-groups/automotive/drivaer/) developed at the Technical University of Munich. This was chosen as it a realistic vehicle model for aerodynamics investigations and is openly accessible for research use. Numerous experimental and numerical aerodynamics studies have been published which also support computational validation. The figure below shows the notchback, fastback and estate vehicles (a), along with the computational domain and inner mesh refinement zones (b). Some of the mesh and refinement zones are adjusted based on the vehicle type under investigation.
 
 ![vehicles](./images/vehicles-and-domain.png)
 
