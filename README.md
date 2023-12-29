@@ -18,8 +18,8 @@ The aim of this work was to investigate the spatio-temporal transport of non-exh
 
 The vehicle geometry we have implemented is based on the [DrivAer model](https://www.epc.ed.tum.de/en/aer/research-groups/automotive/drivaer/) developed at the Technical University of Munich. This was chosen as it a realistic vehicle model for aerodynamics investigations and is openly accessible for research use. Numerous experimental and numerical aerodynamics studies have been published which also support computational validation. The figure below shows the notchback, fastback and estate vehicles (a), along with the computational domain and inner mesh refinement zones (b). Some of the mesh and refinement zones are adjusted based on the vehicle type under investigation.
 
-[!NOTE]
-We have added brake components to this model (front diameter 288mm discs; rear diameter 245mm discs) which was used to simulate brake emissions within the LES model. These are not part of the original DrivAer model.
+>[!NOTE]
+>We have added brake components to this model (front diameter 288mm discs; rear diameter 245mm discs) which was used to simulate brake emissions within the LES model. These are not part of the original DrivAer model.
 
 ![vehicles](./images/vehicles-and-domain.png)
 
