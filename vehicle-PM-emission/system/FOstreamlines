@@ -1,0 +1,43 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Version:  v2206
+    \\  /    A nd           | Website:  www.openfoam.com
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+
+streamLine1
+{
+	type            streamLine;
+	libs            ("libfieldFunctionObjects.so");
+	U		U;
+	fields		(U);
+
+	executeControl  timeStep;
+	executeInterval	100; // every 0.01s
+	writeControl    timeStep;
+	writeInterval	100; // every 0.01s
+
+	timeStart	10; // after quasi-steady state reached
+	timeEnd		20; // end of simulation run
+
+	setFormat       vtk;
+	trackForward    true;
+	//direction	bidirectional;
+
+	lifeTime        10000;
+	nSubCycle       5;
+
+	cloud           particleTracks;
+
+	seedSampleSet
+	{
+    	    type            uniform;
+    	    axis            z;
+    	    start           (-3 0 1e-06);
+    	    end             (-3 0 3);
+    	    nPoints         20;
+	}
+}
+
+// ************************************************************************* //
